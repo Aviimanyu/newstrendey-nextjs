@@ -1,0 +1,18 @@
+# Next.js Static Export Apache Configuration Profile
+# Optimized for MilesWeb cPanel Shared Hosting
+
+# Prevent directory indexing
+Options -Indexes
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Force trailing slash on clean URLs (e.g. /autos/review -> /autos/review/)
+# This ensures Apache loads the correct /autos/review/index.html file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteCond %{REQUEST_URI} !(.*)\.(.*)$
+RewriteRule ^(.*)$ /$1/ [L,R=301]
+
+# Map 404 errors to the Next.js static 404 fallback page
+ErrorDocument 404 /404/index.html
