@@ -38,7 +38,11 @@ export function getArticles(): Article[] {
 // Get article by slug
 export function getArticleBySlug(slug: string): Article | undefined {
   if (!slug) return undefined;
-  return articles.find(article => article.slug === slug);
+  return articles.find(
+  article =>
+    article.slug?.toLowerCase().trim() ===
+    slug?.toLowerCase().trim()
+);
 }
 
 // Get articles in a category
