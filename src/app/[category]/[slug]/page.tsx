@@ -6,7 +6,7 @@ import { Calendar, User, Clock, ArrowLeft, ChevronRight, Award, ShieldAlert, Che
 import AdSenseSlot from "../../../components/AdSenseSlot";
 
 interface PageProps {
-  params: Promise<{ category: string; slug: string }>;
+  params: { category: string; slug: string };
 }
 
 // Pre-render all dynamic posts at build time
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 
 // Generate rich SEO metadata dynamically
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { category, slug } = await params;
+  const { category, slug } = params;
   const article = getArticleBySlug(slug);
   
   if (!article || article.category.toLowerCase() !== category.toLowerCase()) {
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  const { category, slug } = await params;
+ const { category, slug } = params;
   const article = getArticleBySlug(slug);
 
   if (!article || article.category.toLowerCase() !== category.toLowerCase()) {
