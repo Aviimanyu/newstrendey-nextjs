@@ -26,7 +26,7 @@ export const categories: CategoryInfo[] = [
     id: 'entertainment',
     name: 'Entertainment',
     description: 'Celebrity updates, Netflix horror alerts, and awards predictions.',
-    color: '#be6464'
+    color: '#991b1b'
   }
 ];
 
