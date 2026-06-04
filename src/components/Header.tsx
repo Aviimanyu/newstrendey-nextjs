@@ -31,7 +31,10 @@ export default function Header() {
           {/* Brand Logo */}
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2 group">
-              <span className="bg-brand text-white px-3 py-1 rounded-sm text-lg font-extrabold uppercase tracking-widest group-hover:bg-brand-hover transition-colors">
+              <span 
+                className="text-white px-3 py-1 rounded-sm text-lg font-extrabold uppercase tracking-widest transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#be6464" }}
+              >
                 NT
               </span>
               <span className="font-serif text-2xl font-bold tracking-tight text-black group-hover:text-brand transition-colors">

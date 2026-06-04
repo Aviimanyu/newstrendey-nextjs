@@ -54,7 +54,12 @@ export default function RootLayout({
               {/* Brand Profile */}
               <div className="md:col-span-2">
                 <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                  <span className="bg-brand text-white px-3 py-1 rounded-sm text-lg font-extrabold uppercase tracking-widest">NT</span>
+                  <span 
+                    className="text-white px-3 py-1 rounded-sm text-lg font-extrabold uppercase tracking-widest"
+                    style={{ backgroundColor: "#be6464" }}
+                  >
+                    NT
+                  </span>
                   <span className="font-serif">NewsTrendey</span>
                 </Link>
                 <p className="mt-4 text-gray-400 max-w-sm text-sm">
