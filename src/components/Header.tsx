@@ -33,7 +33,7 @@ export default function Header() {
             <Link href="/" className="flex items-center gap-2 group">
               <span 
                 className="text-white px-3 py-1 rounded-sm text-lg font-extrabold uppercase tracking-widest transition-opacity hover:opacity-90"
-                style={{ backgroundColor: "#be6464" }}
+                style={{ backgroundColor: "#991b1b" }}
               >
                 NT
               </span>

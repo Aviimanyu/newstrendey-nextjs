@@ -56,7 +56,7 @@ export default function RootLayout({
                 <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
                   <span 
                     className="text-white px-3 py-1 rounded-sm text-lg font-extrabold uppercase tracking-widest"
-                    style={{ backgroundColor: "#be6464" }}
+                    style={{ backgroundColor: "#991b1b" }}
                   >
                     NT
                   </span>
