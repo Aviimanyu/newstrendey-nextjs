@@ -163,6 +163,7 @@ export default function RootLayout({
                   <li><Link href="/technology" className="hover:text-brand transition-colors">Technology</Link></li>
                   <li><Link href="/sports" className="hover:text-brand transition-colors">Sports</Link></li>
                   <li><Link href="/entertainment" className="hover:text-brand transition-colors">Entertainment</Link></li>
+                  <li><Link href="/rankings" className="hover:text-brand transition-colors">Rankings</Link></li>
                 </ul>
               </div>
 

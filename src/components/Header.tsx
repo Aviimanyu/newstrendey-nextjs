@@ -15,6 +15,7 @@ export default function Header() {
     { name: "Technology", href: "/technology" },
     { name: "Sports", href: "/sports" },
     { name: "Entertainment", href: "/entertainment" },
+    { name: "Rankings", href: "/rankings" },
   ];
 
   const isActive = (href: string) => {

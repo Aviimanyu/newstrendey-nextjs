@@ -27,6 +27,12 @@ export const categories: CategoryInfo[] = [
     name: 'Entertainment',
     description: 'Celebrity updates, Netflix horror alerts, and awards predictions.',
     color: '#991b1b'
+  },
+  {
+    id: 'rankings',
+    name: 'Rankings',
+    description: 'Comprehensive buying guides, performance rankings, and comparison scorecards for top-tier vehicles.',
+    color: '#7c2d12'
   }
 ];
 
