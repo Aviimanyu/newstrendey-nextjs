@@ -18,7 +18,9 @@ function SearchContent() {
 
   useEffect(() => {
     // Load all articles on client mount
-    setAllArticles(getArticles());
+    getArticles().then((articles) => {
+      setAllArticles(articles);
+    });
   }, []);
 
   useEffect(() => {

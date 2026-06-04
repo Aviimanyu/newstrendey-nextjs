@@ -1,29 +1,24 @@
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getArticleBySlug, getArticles, getArticlesByCategory, getCategoryById } from "../../../lib/db";
+import { getPostBySlug } from "../../../lib/posts";
+import { getCategoryById } from "../../../lib/db";
 import { Calendar, User, Clock, ArrowLeft, ChevronRight, Award, ShieldAlert, CheckCircle2, AlertTriangle, ShieldCheck, BookOpen, Sparkles, FileText } from "lucide-react";
 import AdSenseSlot from "../../../components/AdSenseSlot";
 
 interface PageProps {
-  params: { category: string; slug: string };
-}
-
-// Pre-render all dynamic posts at build time
-export async function generateStaticParams() {
-  const articles = getArticles();
-  return articles.map((article) => ({
-    category: article.category.toLowerCase(),
-    slug: article.slug,
-  }));
+  params: Promise<{ category: string; slug: string }>;
 }
 
 // Generate rich SEO metadata dynamically
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { category, slug } = params;
-  const article = getArticleBySlug(slug);
+  const { category, slug } = await params;
+  const article = await getPostBySlug(slug);
   
-  if (!article || article.category.toLowerCase() !== category.toLowerCase()) {
+  if (!article || article.category!== category.toLowerCase()) {
     return {
       title: "Article Not Found",
     };
@@ -33,13 +28,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${article.title} | NewsTrendey`,
     description: article.description,
     alternates: {
-      canonical: `https://newstrendey.com/${article.category.toLowerCase()}/${article.slug}`,
+      canonical: `https://newstrendey.com/${article.category}/${article.slug}`,
     },
     openGraph: {
       title: article.title,
       description: article.description,
       type: "article",
-      url: `https://newstrendey.com/${article.category.toLowerCase()}/${article.slug}`,
+      url: `https://newstrendey.com/${article.category}/${article.slug}`,
       publishedTime: article.datePublished,
       modifiedTime: article.dateModified,
       authors: [article.author],
@@ -60,19 +55,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ArticlePage({ params }: PageProps) {
- const { category, slug } = params;
-  const article = getArticleBySlug(slug);
-
-  if (!article || article.category.toLowerCase() !== category.toLowerCase()) {
+ const { category, slug } = await params;
+const article = await getPostBySlug(slug);
+  if (!article || article.category !== category.toLowerCase()) {
     notFound();
   }
 
   const catInfo = getCategoryById(article.category);
 
   // Get related articles in the same category
-  const related = getArticlesByCategory(article.category)
-    .filter((a) => a.slug !== article.slug)
-    .slice(0, 3);
+  const related: any[] = [];
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("en-US", {
@@ -141,11 +133,11 @@ export default async function ArticlePage({ params }: PageProps) {
       "@type": "ItemList",
       "name": "Table of Contents",
       "numberOfItems": article.headings.length,
-      "itemListElement": article.headings.map((heading, idx) => ({
+      "itemListElement": article.headings.map((heading: any, idx: number) => ({
         "@type": "ListItem",
         "position": idx + 1,
         "name": heading.text,
-        "url": `https://newstrendey.com/${article.category.toLowerCase()}/${article.slug}#${heading.id}`
+        "url": `https://newstrendey.com/${article.category}/${article.slug}#${heading.id}`
       }))
     });
   }
@@ -167,7 +159,7 @@ export default async function ArticlePage({ params }: PageProps) {
   }
 
   // Split content into paragraphs to dynamically inject inline TOC and ads
-  const paragraphs = article.content.split('</p>');
+  const paragraphs: string[] = article.content.split('</p>');
   const cleanParagraphs = paragraphs.map(p => p.trim()).filter(p => p.length > 0);
 
   const introHtml = cleanParagraphs.length > 0 ? cleanParagraphs[0] + '</p>' : '';
@@ -198,7 +190,7 @@ export default async function ArticlePage({ params }: PageProps) {
         <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-6 font-bold uppercase tracking-wider max-w-3xl mx-auto">
           <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href={`/${article.category.toLowerCase()}`} className="hover:text-brand transition-colors">
+          <Link href={`/${article.category}`} className="hover:text-brand transition-colors">
             {catInfo ? catInfo.name : article.category}
           </Link>
           <ChevronRight className="h-3 w-3" />
@@ -248,7 +240,7 @@ export default async function ArticlePage({ params }: PageProps) {
           {/* Featured Hero Image */}
           <div className="mb-6 rounded-card overflow-hidden h-[240px] md:h-[480px] shadow-premium">
             <img
-              src={article.featuredImage}
+              src={article.featuredImage || "/placeholder.jpg"}
               alt={article.title}
               className="w-full h-full object-cover"
             />
@@ -298,7 +290,7 @@ export default async function ArticlePage({ params }: PageProps) {
               </div>
               
               <nav className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3.5 mb-6">
-                {article.headings.map((heading) => {
+                {article.headings.map((heading: any) => {
                   const isH2 = heading.level === "h2";
                   
                   // Custom semantic icons based on heading content
@@ -370,7 +362,7 @@ export default async function ArticlePage({ params }: PageProps) {
           )}
 
           {/* Programmatic Comparison Specs Table (EEAT Competitor signals, Autos category only) */}
-          {article.category.toLowerCase() === "autos" && (
+          {article.category === "autos" && (
             <div className="my-12">
               <h3 className="font-serif text-xl md:text-2xl font-bold text-black mb-4 border-b-2 border-brand pb-2">
                 Head-to-Head Spec Comparison: Cruiser vs. Competitors
@@ -433,7 +425,7 @@ export default async function ArticlePage({ params }: PageProps) {
           )}
 
           {/* Programmatic Accessories Table (Amazon Affiliate, Autos category only) */}
-          {article.category.toLowerCase() === "autos" && (
+          {article.category === "autos" && (
             <div className="my-12 p-6 bg-[#f1f7f7]/40 rounded-card border border-border">
               <h3 className="font-serif text-xl md:text-2xl font-bold text-black mb-2">
                 Recommended Accessories &amp; Upgrades
@@ -572,16 +564,16 @@ export default async function ArticlePage({ params }: PageProps) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {related.map((art) => (
                   <div key={art.slug} className="group hover-card rounded-card border border-border p-4 bg-white flex flex-col justify-between">
-                    <Link href={`/${art.category.toLowerCase()}/${art.slug}`} className="block overflow-hidden rounded-md h-[120px] mb-3 bg-surface">
+                    <Link href={`/${art.category}/${art.slug}`} className="block overflow-hidden rounded-md h-[120px] mb-3 bg-surface">
                       <img
-                        src={art.featuredImage}
+                        src={art.featuredImage || "/placeholder.jpg"}
                         alt={art.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </Link>
                     <div>
                       <h4 className="font-serif text-sm font-bold leading-snug text-black group-hover:text-brand transition-colors line-clamp-2">
-                        <Link href={`/${art.category.toLowerCase()}/${art.slug}`}>{art.title}</Link>
+                        <Link href={`/${art.category}/${art.slug}`}>{art.title}</Link>
                       </h4>
                       <span className="text-[10px] text-text-secondary mt-2 block">{formatDate(art.datePublished)}</span>
                     </div>

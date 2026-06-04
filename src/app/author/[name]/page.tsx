@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AuthorPage({ params }: PageProps) {
-  const articles = getArticles();
+  const articles = await getArticles();
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("en-US", {

@@ -1,76 +1,143 @@
 import { Article, CategoryInfo } from '../types';
 import articlesData from '../data/articles.json';
-
-const articles: Article[] = articlesData as Article[];
+import { fetchGraphQL } from './graphql';
+import { getPostBySlug } from './posts';
 
 export const categories: CategoryInfo[] = [
   {
     id: 'autos',
     name: 'Autos & Vehicles',
     description: 'Expert reviews, buying guides, and breaking news on American and international vehicles.',
-    color: '#1b5f8a' // brand primary blue
+    color: '#1b5f8a'
   },
   {
     id: 'technology',
     name: 'Technology',
     description: 'Tech updates, 5G breakdowns, Apple deals, and cybersecurity advice.',
-    color: '#0066cc' // vibrant accent blue
+    color: '#0066cc'
   },
   {
     id: 'sports',
     name: 'Sports',
     description: 'Pro Bowl updates, Western Conference recaps, and star headlines.',
-    color: '#26870d' // vibrant field green
+    color: '#26870d'
   },
   {
     id: 'entertainment',
     name: 'Entertainment',
     description: 'Celebrity updates, Netflix horror alerts, and awards predictions.',
-    color: '#be6464' // warning/rose red
+    color: '#be6464'
   }
 ];
 
-// Get all articles sorted by date
-export function getArticles(): Article[] {
-  return [...articles].sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime());
+// Get all articles (WordPress merged with static articles)
+export async function getArticles(): Promise<Article[]> {
+  let wpArticles: Article[] = [];
+
+  try {
+    const query = `
+      query GetPosts {
+        posts(first: 50) {
+          nodes {
+            id
+            title
+            slug
+            content
+            date
+            excerpt
+            categories {
+              nodes {
+                name
+                slug
+              }
+            }
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            author {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const data = await fetchGraphQL(query);
+
+    if (data?.posts?.nodes) {
+      wpArticles = data.posts.nodes.map((post: any) => ({
+        slug: post.slug || '',
+        title: post.title || '',
+        content: post.content || '',
+        description: post.excerpt?.replace(/<[^>]+>/g, '') || post.content?.replace(/<[^>]+>/g, '').slice(0, 150) || '',
+        category: post.categories?.nodes?.[0]?.slug || 'news',
+        author: post.author?.node?.name || 'David Williams',
+        featuredImage: post.featuredImage?.node?.sourceUrl || '',
+        datePublished: post.date || new Date().toISOString(),
+        dateModified: post.date || new Date().toISOString(),
+        headings: [],
+      }));
+    }
+  } catch (error) {
+    console.error('Error fetching articles from WordPress:', error);
+  }
+
+  // Filter out static articles that are authors or have the same slug as WordPress posts
+  const filteredStatic = (articlesData as Article[]).filter((staticArt) => {
+    // Avoid authors
+    if (staticArt.category === 'author') return false;
+    // Avoid duplicates
+    const isDuplicate = wpArticles.some(
+      (wpArt) => wpArt.slug?.toLowerCase().trim() === staticArt.slug?.toLowerCase().trim()
+    );
+    return !isDuplicate;
+  });
+
+  // Merge both arrays
+  const merged = [...wpArticles, ...filteredStatic];
+
+  // Sort by datePublished descending
+  return merged.sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime());
 }
 
 // Get article by slug
-export function getArticleBySlug(slug: string): Article | undefined {
-  if (!slug) return undefined;
-  return articles.find(
-  article =>
-    article.slug?.toLowerCase().trim() ===
-    slug?.toLowerCase().trim()
-);
+export async function getArticleBySlug(slug: string): Promise<Article | null> {
+  return getPostBySlug(slug);
 }
 
-// Get articles in a category
-export function getArticlesByCategory(categoryId: string): Article[] {
+// Category articles
+export async function getArticlesByCategory(categoryId: string): Promise<Article[]> {
   if (!categoryId) return [];
-  return getArticles().filter(article => 
-    article.category && 
-    article.category.toLowerCase() === categoryId.toLowerCase()
+  const articles = await getArticles();
+  return articles.filter(
+    (article) =>
+      article.category &&
+      article.category.toLowerCase() === categoryId.toLowerCase()
   );
 }
 
-// Get featured articles
-export function getFeaturedArticles(limit = 4): Article[] {
-  // Return the longest articles or newest ones under specific categories as featured
-  return getArticles().slice(0, limit);
+// Featured articles
+export async function getFeaturedArticles(limit = 4): Promise<Article[]> {
+  const articles = await getArticles();
+  return articles.slice(0, limit);
 }
 
 // Get trending articles
-export function getTrendingArticles(limit = 5): Article[] {
-  // Return a slice of recent articles
-  return getArticles().slice(2, 2 + limit);
+export async function getTrendingArticles(limit = 5): Promise<Article[]> {
+  const articles = await getArticles();
+  return articles.slice(2, 2 + limit);
 }
 
 // Search articles
-export function searchArticles(query: string): Article[] {
+export async function searchArticles(query: string): Promise<Article[]> {
   if (!query) return [];
+  const articles = await getArticles();
   const cleanQuery = query.toLowerCase().trim();
-  return getArticles().filter(article => {
+  return articles.filter((article) => {
     return (
       (article.title && article.title.toLowerCase().includes(cleanQuery)) ||
       (article.description && article.description.toLowerCase().includes(cleanQuery)) ||
@@ -79,8 +146,8 @@ export function searchArticles(query: string): Article[] {
   });
 }
 
-// Get category metadata
+// Category metadata
 export function getCategoryById(id: string): CategoryInfo | undefined {
   if (!id) return undefined;
-  return categories.find(cat => cat.id && cat.id.toLowerCase() === id.toLowerCase());
+  return categories.find((cat) => cat.id && cat.id.toLowerCase() === id.toLowerCase());
 }

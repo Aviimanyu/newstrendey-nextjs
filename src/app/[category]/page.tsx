@@ -41,7 +41,7 @@ export default async function CategoryPage({ params }: PageProps) {
     notFound();
   }
 
-  const articles = getArticlesByCategory(catInfo.id);
+  const articles = await getArticlesByCategory(catInfo.id);
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("en-US", {

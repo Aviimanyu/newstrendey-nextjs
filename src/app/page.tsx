@@ -2,10 +2,10 @@ import Link from "next/link";
 import { getFeaturedArticles, getTrendingArticles, categories, getArticles } from "../lib/db";
 import { Calendar, User, ArrowRight } from "lucide-react";
 
-export default function Home() {
-  const featured = getFeaturedArticles(4);
-  const trending = getTrendingArticles(5);
-  const allArticles = getArticles();
+export default async function Home() {
+  const featured = await getFeaturedArticles(4);
+  const trending = await getTrendingArticles(5);
+  const allArticles = await getArticles();
 
   // Pick the absolute main hero article (first one)
   const heroArticle = featured[0];
