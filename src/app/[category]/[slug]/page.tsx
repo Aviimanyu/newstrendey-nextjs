@@ -24,17 +24,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const title = article.seo?.title || `${article.title} | NewsTrendey`;
+  const description = article.seo?.metaDesc || article.description;
+  const canonical = article.seo?.canonical || `https://newstrendey.com/${article.category}/${article.slug}`;
+
   return {
-    title: `${article.title} | NewsTrendey`,
-    description: article.description,
+    title,
+    description,
     alternates: {
-      canonical: `https://newstrendey.com/${article.category}/${article.slug}`,
+      canonical,
     },
     openGraph: {
-      title: article.title,
-      description: article.description,
+      title: article.seo?.title || article.title,
+      description,
       type: "article",
-      url: `https://newstrendey.com/${article.category}/${article.slug}`,
+      url: canonical,
       publishedTime: article.datePublished,
       modifiedTime: article.dateModified,
       authors: [article.author],
@@ -47,8 +51,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: article.title,
-      description: article.description,
+      title: article.seo?.title || article.title,
+      description,
       images: [article.featuredImage],
     },
   };

@@ -15,6 +15,11 @@ export interface Article {
   featuredImage: string;
   headings: Heading[];
   content: string;
+  seo?: {
+    title?: string;
+    metaDesc?: string;
+    canonical?: string;
+  };
 }
 
 export interface CategoryInfo {

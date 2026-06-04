@@ -39,6 +39,12 @@ export async function getPostBySlug(slug: string): Promise<Article | null> {
                 name
               }
             }
+
+            seo {
+              title
+              metaDesc
+              canonical
+            }
           }
         }
       }
@@ -70,6 +76,11 @@ export async function getPostBySlug(slug: string): Promise<Article | null> {
         wpPost.excerpt?.replace(/<[^>]+>/g, '') || '',
 
       headings: [],
+      seo: wpPost.seo ? {
+        title: wpPost.seo.title || null,
+        metaDesc: wpPost.seo.metaDesc || null,
+        canonical: wpPost.seo.canonical || null,
+      } : undefined,
     } as any;
   }
 
