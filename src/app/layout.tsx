@@ -81,9 +81,12 @@ export const metadata: Metadata = {
   description: "Your ultimate destination for the latest USA automobile news, car reviews, tech innovations, and trending sports updates.",
   metadataBase: new URL("https://newstrendey.com"),
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico?v=3", sizes: "any" },
+      { url: "/icon.png?v=3", type: "image/png", sizes: "192x192" }
+    ],
+    shortcut: "/favicon.ico?v=3",
+    apple: "/apple-icon.png?v=3",
   },
 };
 
