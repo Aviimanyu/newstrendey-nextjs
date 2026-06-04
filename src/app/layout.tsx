@@ -106,7 +106,7 @@ export default function RootLayout({
         {/* Global Premium Footer (Car and Driver Inspired) */}
         <footer className="bg-black text-white py-12 border-t-4 border-brand">
           <div className="container-custom">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
               {/* Brand Profile */}
               <div className="md:col-span-2">
                 <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -160,6 +160,17 @@ export default function RootLayout({
                   <li><Link href="/technology" className="hover:text-brand transition-colors">Technology</Link></li>
                   <li><Link href="/sports" className="hover:text-brand transition-colors">Sports</Link></li>
                   <li><Link href="/entertainment" className="hover:text-brand transition-colors">Entertainment</Link></li>
+                </ul>
+              </div>
+
+              {/* Trust & Policies */}
+              <div>
+                <h4 className="text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Editorial Integrity</h4>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li><Link href="/editorial-policy" className="hover:text-brand transition-colors">Editorial Policy</Link></li>
+                  <li><Link href="/fact-checking-policy" className="hover:text-brand transition-colors">Fact-Checking Policy</Link></li>
+                  <li><Link href="/corrections-policy" className="hover:text-brand transition-colors">Corrections Policy</Link></li>
+                  <li><Link href="/ownership-and-funding" className="hover:text-brand transition-colors">Ownership &amp; Funding</Link></li>
                 </ul>
               </div>
               

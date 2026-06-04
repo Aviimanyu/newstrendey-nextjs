@@ -51,8 +51,62 @@ export default async function CategoryPage({ params }: PageProps) {
     });
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://newstrendey.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": catInfo.name,
+        "item": `https://newstrendey.com/${catInfo.id}`
+      }
+    ]
+  };
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${catInfo.name} Category Feed`,
+    "url": `https://newstrendey.com/${catInfo.id}`,
+    "description": catInfo.description,
+    "publisher": {
+      "@type": "Organization",
+      "name": "NewsTrendey",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://newstrendey.com/favicon.ico"
+      }
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": articles.length,
+      "itemListElement": articles.map((article, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "url": `https://newstrendey.com/${article.category}/${article.slug}`,
+        "name": article.title
+      }))
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen py-8">
+      {/* Inject Structured Data Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
       <div className="container-custom">
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-8 font-bold uppercase tracking-wider">
