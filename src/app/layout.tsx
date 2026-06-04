@@ -178,7 +178,7 @@ export default function RootLayout({
             
             {/* Fine Print */}
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
-              <p>&copy; {new Date().getFullYear()} NewsTrendey.com. All rights reserved. Rebuilt with Next.js &amp; Headless WordPress.</p>
+              <p>&copy; {new Date().getFullYear()} NewsTrendey.com. All rights reserved.</p>
               <div className="flex gap-4">
                 <Link href="/privacy-policy" className="hover:underline">Privacy</Link>
                 <Link href="/terms-and-conditions" className="hover:underline">Terms</Link>
