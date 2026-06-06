@@ -26,13 +26,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = article.seo?.title || `${article.title} | NewsTrendey`;
   const description = article.seo?.metaDesc || article.description;
-  const canonical = article.seo?.canonical || `https://newstrendey.com/${article.category}/${article.slug}`;
+  
+  let canonical = article.seo?.canonical || `https://newstrendey.com/${article.category}/${article.slug}/`;
+  if (canonical && !canonical.endsWith("/")) {
+    canonical = canonical + "/";
+  }
 
   return {
     title,
     description,
     alternates: {
       canonical,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
     },
     openGraph: {
       title: article.seo?.title || article.title,
@@ -60,7 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArticlePage({ params }: PageProps) {
  const { category, slug } = await params;
-const article = await getPostBySlug(slug);
+ const article = await getPostBySlug(slug);
   if (!article || article.category !== category.toLowerCase()) {
     notFound();
   }
@@ -90,6 +102,11 @@ const article = await getPostBySlug(slug);
     }
   }
 
+  let canonical = article.seo?.canonical || `https://newstrendey.com/${article.category}/${article.slug}/`;
+  if (canonical && !canonical.endsWith("/")) {
+    canonical = canonical + "/";
+  }
+
   // Structured Data Schema Injection (E-E-A-T Compliant Article & Review schema)
   const isReview = article.slug.includes("review") || article.title.toLowerCase().includes("review");
   
@@ -101,18 +118,31 @@ const article = await getPostBySlug(slug);
       "image": [article.featuredImage],
       "datePublished": article.datePublished,
       "dateModified": article.dateModified,
+      "url": canonical,
       "author": {
         "@type": "Person",
         "name": article.author,
-        "url": `https://newstrendey.com/author/davidwilliams`
+        "jobTitle": "Automotive Journalist & Industry Specialist",
+        "url": `https://newstrendey.com/author/davidwilliams/`,
+        "sameAs": [
+          "https://www.linkedin.com/in/davidwilliams-autos",
+          "https://twitter.com/davidwilliams_autos"
+        ]
       },
       "publisher": {
         "@type": "Organization",
         "name": "NewsTrendey",
+        "url": "https://newstrendey.com/",
         "logo": {
           "@type": "ImageObject",
           "url": "https://newstrendey.com/wp-content/uploads/2025/12/cropped-Untitled-design-1.jpg"
-        }
+        },
+        "publishingPrinciples": "https://newstrendey.com/editorial-policy/",
+        "sameAs": [
+          "https://facebook.com/newstrendey",
+          "https://www.instagram.com/newstrendey",
+          "https://x.com/newstrendey"
+        ]
       },
       "description": article.description,
       ...(isReview && {
@@ -130,6 +160,32 @@ const article = await getPostBySlug(slug);
     }
   ];
 
+  // Inject BreadcrumbList Schema
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://newstrendey.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": catInfo ? catInfo.name : article.category,
+        "item": `https://newstrendey.com/${article.category}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": article.title,
+        "item": canonical
+      }
+    ]
+  });
+
   // Inject Table of Contents ItemList Schema for jump link indexing
   if (article.headings && article.headings.length > 0) {
     schemas.push({
@@ -141,7 +197,7 @@ const article = await getPostBySlug(slug);
         "@type": "ListItem",
         "position": idx + 1,
         "name": heading.text,
-        "url": `https://newstrendey.com/${article.category}/${article.slug}#${heading.id}`
+        "url": `https://newstrendey.com/${article.category}/${article.slug}/#${heading.id}`
       }))
     });
   }
@@ -194,7 +250,7 @@ const article = await getPostBySlug(slug);
         <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-6 font-bold uppercase tracking-wider max-w-3xl mx-auto">
           <Link href="/" className="hover:text-brand transition-colors">Home</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link href={`/${article.category}`} className="hover:text-brand transition-colors">
+          <Link href={`/${article.category}/`} className="hover:text-brand transition-colors">
             {catInfo ? catInfo.name : article.category}
           </Link>
           <ChevronRight className="h-3 w-3" />
@@ -222,7 +278,7 @@ const article = await getPostBySlug(slug);
             <div className="flex flex-wrap items-center gap-4 text-xs text-text-secondary font-bold mb-6 border-b border-border pb-4">
               <span className="flex items-center gap-1.5">
                 <User className="h-4 w-4 text-brand" />
-                By <Link href="/author/davidwilliams" className="hover:text-brand transition-colors underline">{article.author}</Link>
+                By <Link href="/author/davidwilliams/" className="hover:text-brand transition-colors underline">{article.author}</Link>
               </span>
               <span className="text-gray-300">|</span>
               <span className="flex items-center gap-1.5">
@@ -521,7 +577,7 @@ const article = await getPostBySlug(slug);
                 </div>
               </div>
               <div className="text-xs text-text-secondary md:border-l border-border md:pl-6 max-w-xl font-light leading-relaxed">
-                <strong>David Williams</strong> is an automotive journalist with 8+ years of experience covering off-road platforms. His vehicle reviews are published widely, including inside <em>MotorTrend</em>, <em>Car and Driver</em>, and <em>Edmunds</em>. Our assessments comply completely with our <Link href="/about-us" className="text-brand hover:underline font-bold text-xs uppercase tracking-widest border border-brand/10 px-2 py-0.5 rounded-sm bg-brand/5">Editorial Methodology</Link>.
+                <strong>David Williams</strong> is an automotive journalist with 8+ years of experience covering off-road platforms. His vehicle reviews are published widely, including inside <em>MotorTrend</em>, <em>Car and Driver</em>, and <em>Edmunds</em>. Our assessments comply completely with our <Link href="/about-us/" className="text-brand hover:underline font-bold text-xs uppercase tracking-widest border border-brand/10 px-2 py-0.5 rounded-sm bg-brand/5">Editorial Methodology</Link>.
               </div>
             </div>
             
@@ -568,7 +624,7 @@ const article = await getPostBySlug(slug);
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {related.map((art) => (
                   <div key={art.slug} className="group hover-card rounded-card border border-border p-4 bg-white flex flex-col justify-between">
-                    <Link href={`/${art.category}/${art.slug}`} className="block overflow-hidden rounded-md h-[120px] mb-3 bg-surface">
+                    <Link href={`/${art.category}/${art.slug}/`} className="block overflow-hidden rounded-md h-[120px] mb-3 bg-surface">
                       <img
                         src={art.featuredImage || "/placeholder.jpg"}
                         alt={art.title}
@@ -577,7 +633,7 @@ const article = await getPostBySlug(slug);
                     </Link>
                     <div>
                       <h4 className="font-serif text-sm font-bold leading-snug text-black group-hover:text-brand transition-colors line-clamp-2">
-                        <Link href={`/${art.category}/${art.slug}`}>{art.title}</Link>
+                        <Link href={`/${art.category}/${art.slug}/`}>{art.title}</Link>
                       </h4>
                       <span className="text-[10px] text-text-secondary mt-2 block">{formatDate(art.datePublished)}</span>
                     </div>

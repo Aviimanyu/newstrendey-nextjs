@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${catInfo.name} | NewsTrendey`,
     description: catInfo.description,
     alternates: {
-      canonical: `https://newstrendey.com/${catInfo.id}`,
+      canonical: `https://newstrendey.com/${catInfo.id}/`,
     },
   };
 }
@@ -59,13 +59,13 @@ export default async function CategoryPage({ params }: PageProps) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://newstrendey.com"
+        "item": "https://newstrendey.com/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": catInfo.name,
-        "item": `https://newstrendey.com/${catInfo.id}`
+        "item": `https://newstrendey.com/${catInfo.id}/`
       }
     ]
   };
@@ -74,7 +74,7 @@ export default async function CategoryPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": `${catInfo.name} Category Feed`,
-    "url": `https://newstrendey.com/${catInfo.id}`,
+    "url": `https://newstrendey.com/${catInfo.id}/`,
     "description": catInfo.description,
     "publisher": {
       "@type": "Organization",
@@ -90,7 +90,7 @@ export default async function CategoryPage({ params }: PageProps) {
       "itemListElement": articles.map((article, idx) => ({
         "@type": "ListItem",
         "position": idx + 1,
-        "url": `https://newstrendey.com/${article.category}/${article.slug}`,
+        "url": `https://newstrendey.com/${article.category.toLowerCase()}/${article.slug}/`,
         "name": article.title
       }))
     }
@@ -142,7 +142,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 className="group hover-card rounded-card border border-border p-4 bg-white flex flex-col justify-between"
               >
                 <Link
-                  href={`/${article.category}/${article.slug}`}
+                  href={`/${article.category.toLowerCase()}/${article.slug}/`}
                   className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface"
                 >
                   <img
@@ -154,7 +154,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 <div className="flex-grow flex flex-col justify-between">
                   <div>
                     <h2 className="font-serif text-base font-bold leading-snug text-black group-hover:text-brand transition-colors line-clamp-2">
-                      <Link href={`/${article.category}/${article.slug}`}>{article.title}</Link>
+                      <Link href={`/${article.category.toLowerCase()}/${article.slug}/`}>{article.title}</Link>
                     </h2>
                     <p className="mt-2 text-xs text-text-secondary line-clamp-3 leading-relaxed">
                       {article.description}

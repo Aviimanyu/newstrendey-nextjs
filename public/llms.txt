@@ -1,0 +1,36 @@
+# NewsTrendey
+
+NewsTrendey is a premium USA-focused publishing brand covering automotive reviews, buying guides, emerging tech updates, and sports analysis.
+
+## Primary Sections
+
+- **Autos & Vehicles**: Expert hands-on reviews, buying guides, and breaking vehicle news.
+  - Silo Path: `/autos/`
+- **Technology**: Technical updates, 5G breakdowns, cybersecurity advice, and product assessments.
+  - Silo Path: `/technology/`
+- **Sports**: High-profile Western Conference updates, Pro Bowl recaps, and star headlines.
+  - Silo Path: `/sports/`
+- **Entertainment**: Celebrity updates, streaming guides, and awards predictions.
+  - Silo Path: `/entertainment/`
+- **Rankings**: Comprehensive buying guides, comparison tables, and scorecards for automobiles.
+  - Silo Path: `/rankings/`
+
+## Editorial Integrity & E-E-A-T
+
+All reviews and guides on NewsTrendey comply with strict search quality guidelines, emphasizing hands-on testing, original opinions, and factual accuracy.
+- Primary Author: David Williams (Automotive Specialist & Journalist with 12+ years experience reviewing vehicles).
+- Editorial Policy: `/editorial-policy/`
+- Fact-Checking Policy: `/fact-checking-policy/`
+- Corrections Policy: `/corrections-policy/`
+- Ownership & Funding: `/ownership-and-funding/`
+
+## Sitemap Directory
+
+Sitemap index is available at `/sitemap.xml`, which links to topical XML sitemaps:
+- Static Pages: `/sitemap-static.xml`
+- Autos: `/sitemap-autos.xml`
+- Technology: `/sitemap-technology.xml`
+- Sports: `/sitemap-sports.xml`
+- Entertainment: `/sitemap-entertainment.xml`
+- Rankings: `/sitemap-rankings.xml`
+- Google News Sitemap: `/sitemap-news.xml`
