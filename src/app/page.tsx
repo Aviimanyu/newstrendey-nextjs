@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getFeaturedArticles, getTrendingArticles, categories, getArticles } from "../lib/db";
 import { Calendar, User, ArrowRight } from "lucide-react";
 
@@ -28,10 +29,13 @@ export default async function Home() {
             {/* Main Hero Card (2 columns) */}
             <div className="lg:col-span-2 flex flex-col justify-between group">
               <Link href={`/${heroArticle.category.toLowerCase()}/${heroArticle.slug}/`} className="block overflow-hidden rounded-card relative h-[300px] lg:h-[500px] shadow-premium bg-surface">
-                <img
+                <Image
                   src={heroArticle.featuredImage}
                   alt={heroArticle.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  priority
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 {/* Visual Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8">
@@ -96,10 +100,12 @@ export default async function Home() {
           {secondaryFeatured.map((article) => (
             <div key={article.slug} className="flex flex-col justify-between group hover-card rounded-card border border-border p-4 bg-white">
               <Link href={`/${article.category.toLowerCase()}/${article.slug}/`} className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface relative">
-                <img
+                <Image
                   src={article.featuredImage}
                   alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <span className="absolute top-2 left-2 bg-black text-white text-[9px] uppercase tracking-widest font-extrabold px-2 py-0.5 rounded-sm">
                   {article.category}
@@ -157,11 +163,13 @@ export default async function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {catArticles.map((article) => (
                     <article key={article.slug} className="group hover-card rounded-card border border-border p-4 bg-white flex flex-col justify-between">
-                      <Link href={`/${article.category.toLowerCase()}/${article.slug}/`} className="block overflow-hidden rounded-md h-[160px] mb-4 bg-surface">
-                        <img
+                      <Link href={`/${article.category.toLowerCase()}/${article.slug}/`} className="block overflow-hidden rounded-md h-[160px] mb-4 bg-surface relative">
+                        <Image
                           src={article.featuredImage}
                           alt={article.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </Link>
                       <div className="flex-grow flex flex-col justify-between">

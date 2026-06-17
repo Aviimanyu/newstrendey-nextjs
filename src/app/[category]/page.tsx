@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getCategoryById, getArticlesByCategory, categories } from "../../lib/db";
 import { Calendar, ChevronRight } from "lucide-react";
 
@@ -24,11 +25,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const catId = catInfo.id.toLowerCase();
+
   return {
     title: `${catInfo.name} | NewsTrendey`,
     description: catInfo.description,
     alternates: {
-      canonical: `https://newstrendey.com/${catInfo.id}/`,
+      canonical: `https://newstrendey.com/${catId}/`,
+      languages: {
+        "x-default": `https://newstrendey.com/${catId}/`,
+        "en": `https://newstrendey.com/${catId}/`,
+        "es": `https://newstrendey.com/es/${catId}/`,
+        "fr": `https://newstrendey.com/fr/${catId}/`,
+        "de": `https://newstrendey.com/de/${catId}/`,
+        "pt": `https://newstrendey.com/pt/${catId}/`,
+        "it": `https://newstrendey.com/it/${catId}/`,
+      }
     },
   };
 }
@@ -143,12 +155,14 @@ export default async function CategoryPage({ params }: PageProps) {
               >
                 <Link
                   href={`/${article.category.toLowerCase()}/${article.slug}/`}
-                  className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface"
+                  className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface relative"
                 >
-                  <img
+                  <Image
                     src={article.featuredImage}
                     alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </Link>
                 <div className="flex-grow flex flex-col justify-between">

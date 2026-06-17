@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { getArticles, categories } from "../../lib/db";
 import { Article } from "../../types";
@@ -135,12 +136,14 @@ function SearchContent() {
                   >
                     <Link
                       href={`/${article.category.toLowerCase()}/${article.slug}/`}
-                      className="block overflow-hidden rounded-md h-[160px] mb-4 bg-surface"
+                      className="block overflow-hidden rounded-md h-[160px] mb-4 bg-surface relative"
                     >
-                      <img
+                      <Image
                         src={article.featuredImage}
                         alt={article.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </Link>
                     <div className="flex-grow flex flex-col justify-between">

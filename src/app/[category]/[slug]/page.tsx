@@ -4,10 +4,10 @@ export const dynamicParams = true;
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getPostBySlug } from "../../../lib/posts";
 import { getCategoryById } from "../../../lib/db";
 import { Calendar, User, Clock, ArrowLeft, ChevronRight, Award, ShieldAlert, CheckCircle2, AlertTriangle, ShieldCheck, BookOpen, Sparkles, FileText } from "lucide-react";
-import AdSenseSlot from "../../../components/AdSenseSlot";
 
 interface PageProps {
   params: Promise<{ category: string; slug: string }>;
@@ -37,6 +37,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: {
       canonical,
+      languages: {
+        "x-default": `https://newstrendey.com/${article.category}/${article.slug}/`,
+        "en": `https://newstrendey.com/${article.category}/${article.slug}/`,
+        "es": `https://newstrendey.com/es/${article.category}/${article.slug}/`,
+        "fr": `https://newstrendey.com/fr/${article.category}/${article.slug}/`,
+        "de": `https://newstrendey.com/de/${article.category}/${article.slug}/`,
+        "pt": `https://newstrendey.com/pt/${article.category}/${article.slug}/`,
+        "it": `https://newstrendey.com/it/${article.category}/${article.slug}/`,
+      }
     },
     robots: {
       index: true,
@@ -220,8 +229,11 @@ export default async function ArticlePage({ params }: PageProps) {
     });
   }
 
+  // Pre-process article content to inject lazy loading and async decoding to any inline images
+  const processedContent = (article.content || "").replace(/<img\s+(?![^>]*loading=)/gi, '<img loading="lazy" decoding="async" ');
+
   // Split content into paragraphs to dynamically inject inline TOC and ads
-  const paragraphs: string[] = article.content.split('</p>');
+  const paragraphs: string[] = processedContent.split('</p>');
   const cleanParagraphs = paragraphs.map(p => p.trim()).filter(p => p.length > 0);
 
   const introHtml = cleanParagraphs.length > 0 ? cleanParagraphs[0] + '</p>' : '';
@@ -237,7 +249,7 @@ export default async function ArticlePage({ params }: PageProps) {
     : '';
 
   return (
-    <article className="bg-white min-h-screen py-8 pb-32 animate-in fade-in duration-200">
+    <article className="bg-white min-h-screen py-8 pb-16 animate-in fade-in duration-200">
       {/* Dynamic SEO JSON-LD Injections */}
       {schemas.map((schema, index) => (
         <script
@@ -300,18 +312,18 @@ export default async function ArticlePage({ params }: PageProps) {
           </header>
 
           {/* Featured Hero Image */}
-          <div className="mb-6 rounded-card overflow-hidden h-[240px] md:h-[480px] shadow-premium">
-            <img
+          <div className="mb-6 rounded-card overflow-hidden h-[240px] md:h-[480px] shadow-premium relative">
+            <Image
               src={article.featuredImage || "/placeholder.jpg"}
               alt={article.title}
-              className="w-full h-full object-cover"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 1024px"
+              className="object-cover"
             />
           </div>
 
-          {/* Ad Unit 1: Top Leaderboard Responsive Ad */}
-          <div className="my-6 flex justify-center bg-[#f1f7f7]/30 border border-border/40 py-2 rounded-sm max-w-full overflow-hidden">
-            <AdSenseSlot slot="7263829102" type="billboard" />
-          </div>
+
 
           {/* Hands-on Rating Score box for reviews (Helpful Content EEAT Indicator) */}
           {isReview && (
@@ -410,10 +422,7 @@ export default async function ArticlePage({ params }: PageProps) {
             />
           )}
 
-          {/* Ad Unit 2: Google AdSense In-Article Responsive Banner (Placed after 3rd Paragraph) */}
-          <div className="my-8 flex justify-center bg-[#f1f7f7]/30 border border-border/40 py-4 rounded-sm max-w-full overflow-hidden">
-            <AdSenseSlot slot="8273615291" type="inline" />
-          </div>
+
 
           {/* Remaining Article Content */}
           {restHtml && (
@@ -626,11 +635,13 @@ export default async function ArticlePage({ params }: PageProps) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {related.map((art) => (
                   <div key={art.slug} className="group hover-card rounded-card border border-border p-4 bg-white flex flex-col justify-between">
-                    <Link href={`/${art.category}/${art.slug}/`} className="block overflow-hidden rounded-md h-[120px] mb-3 bg-surface">
-                      <img
+                    <Link href={`/${art.category}/${art.slug}/`} className="block overflow-hidden rounded-md h-[120px] mb-3 bg-surface relative">
+                      <Image
                         src={art.featuredImage || "/placeholder.jpg"}
                         alt={art.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </Link>
                     <div>
@@ -654,12 +665,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Sticky Bottom Viewport Ad Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border flex justify-center py-2 h-[90px] shadow-lg animate-in slide-in-from-bottom duration-300">
-        <div className="relative w-full max-w-4xl flex items-center justify-center px-4">
-          <AdSenseSlot slot="9273618391" type="inline" />
-        </div>
-      </div>
+
     </article>
   );
 }

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { getArticles } from "../../../lib/db";
 import { Calendar, User, ChevronRight } from "lucide-react";
 
@@ -75,12 +76,14 @@ export default async function AuthorPage({ params }: PageProps) {
             >
               <Link
                 href={`/${article.category.toLowerCase()}/${article.slug}/`}
-                className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface"
+                className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface relative"
               >
-                <img
+                <Image
                   src={article.featuredImage}
                   alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </Link>
               <div className="flex-grow flex flex-col justify-between">

@@ -82,6 +82,15 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://newstrendey.com"),
   alternates: {
     canonical: "https://newstrendey.com/",
+    languages: {
+      "x-default": "https://newstrendey.com/",
+      "en": "https://newstrendey.com/",
+      "es": "https://newstrendey.com/es/",
+      "fr": "https://newstrendey.com/fr/",
+      "de": "https://newstrendey.com/de/",
+      "pt": "https://newstrendey.com/pt/",
+      "it": "https://newstrendey.com/it/",
+    }
   },
   robots: {
     index: true,

@@ -2,9 +2,10 @@
 
 import { useState, Fragment } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Article } from "../types";
 import { Calendar, User, Search, BookOpen, ShieldCheck, CheckCircle2, Award, Clock, ArrowRight, ExternalLink } from "lucide-react";
-import AdSenseSlot from "./AdSenseSlot";
+
 
 interface BlogFeedProps {
   initialArticles: Article[];
@@ -151,17 +152,19 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
               href={`/${featuredArticle.category.toLowerCase()}/${featuredArticle.slug}/`}
               className="block overflow-hidden rounded-md h-[240px] md:h-[380px] w-full relative bg-[#f1f7f7]"
             >
-              <img
+              <Image
                 src={featuredArticle.featuredImage}
                 alt={featuredArticle.title}
-                className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-500"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+                className="object-cover hover:scale-[1.02] transition-transform duration-500"
               />
             </Link>
           </div>
         )}
 
-        {/* ================= ADSENSE BILLBOARD SLOT ================= */}
-        <AdSenseSlot slot="8273928172" type="billboard" className="mb-12" />
+
 
         {/* ================= INTERACTIVE FILTER & SEARCH BAR ================= */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 border-b border-[#f1f7f7] pb-6">
@@ -209,10 +212,12 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
                       href={`/${article.category.toLowerCase()}/${article.slug}/`}
                       className="block overflow-hidden rounded-md h-[180px] mb-4 bg-[#f1f7f7] relative"
                     >
-                      <img
+                      <Image
                         src={article.featuredImage}
                         alt={article.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <span className="absolute top-2 left-2 bg-white/90 text-[#1c5f8b] text-[9px] uppercase tracking-widest font-extrabold px-2 py-0.5 rounded-sm shadow-low">
                         {article.category}
@@ -259,12 +264,7 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
                     </div>
                   </article>
                   
-                  {/* Inject Inline AdSense Slot after the 3rd card in the grid layout */}
-                  {idx === 2 && (
-                    <div className="col-span-1 md:col-span-3 my-4">
-                      <AdSenseSlot slot="3456789012" type="inline" />
-                    </div>
-                  )}
+
                 </Fragment>
               ))}
             </div>

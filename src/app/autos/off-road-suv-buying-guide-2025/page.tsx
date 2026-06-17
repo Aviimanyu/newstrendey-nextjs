@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, User, Clock, ChevronRight, Award, ShieldCheck, CheckCircle2, AlertTriangle, BookOpen, Sparkles, FileText, HelpCircle } from "lucide-react";
-import AdSenseSlot from "../../../components/AdSenseSlot";
 
 export const metadata: Metadata = {
   title: "The Complete Off-Road SUV Buying Guide 2025 | NewsTrendey",
@@ -79,7 +79,7 @@ export default function OffRoadSUVBuyingGuide() {
   ];
 
   return (
-    <article className="bg-white min-h-screen py-8 pb-32 animate-in fade-in duration-200">
+    <article className="bg-white min-h-screen py-8 pb-16 animate-in fade-in duration-200">
       {/* Dynamic SEO JSON-LD Injections */}
       {schemas.map((schema, index) => (
         <script
@@ -159,18 +159,18 @@ export default function OffRoadSUVBuyingGuide() {
           </div>
 
           {/* Hero Image */}
-          <div className="mb-6 rounded-card overflow-hidden h-[240px] md:h-[480px] shadow-premium">
-            <img
-              src="/wp-content/uploads/2025/12/header_image-1.jpg"
+          <div className="mb-6 rounded-card overflow-hidden h-[240px] md:h-[480px] shadow-premium relative">
+            <Image
+              src="/wp-content/uploads/2025/12/header_image-1.webp"
               alt="Elite Off-Road SUVs traversing rugged mountain trail"
-              className="w-full h-full object-cover"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 1024px"
+              className="object-cover"
             />
           </div>
 
-          {/* Ad Unit 1: Top Leaderboard Responsive Ad */}
-          <div className="my-6 flex justify-center bg-[#f1f7f7]/30 border border-border/40 py-2 rounded-sm max-w-full overflow-hidden">
-            <AdSenseSlot slot="7263829102" type="billboard" />
-          </div>
+
 
           {/* Intro Paragraph */}
           <div className="article-prose mb-8">
@@ -256,10 +256,7 @@ export default function OffRoadSUVBuyingGuide() {
               For deep-country overlanding, body-on-frame platforms are heavily preferred. They absorb rock impacts and chassis twisting without transferring stress cracks into the passenger cabin.
             </p>
 
-            {/* Ad Unit 2: In-Article AdSense Banner */}
-            <div className="my-8 flex justify-center bg-[#f1f7f7]/30 border border-border/40 py-4 rounded-sm max-w-full overflow-hidden">
-              <AdSenseSlot slot="8273615291" type="inline" />
-            </div>
+
 
             <h2 id="ga-f-platform">3. The GA-F Global Platform Revolution</h2>
             <p>
@@ -368,12 +365,7 @@ export default function OffRoadSUVBuyingGuide() {
         </div>
       </div>
 
-      {/* Sticky Bottom Viewport Ad Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border flex justify-center py-2 h-[90px] shadow-lg animate-in slide-in-from-bottom duration-300">
-        <div className="relative w-full max-w-4xl flex items-center justify-center px-4">
-          <AdSenseSlot slot="9273618391" type="inline" />
-        </div>
-      </div>
+
     </article>
   );
 }

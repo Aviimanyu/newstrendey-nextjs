@@ -1,7 +1,61 @@
 import { NextResponse } from "next/server";
 import { getArticlesByCategory } from "./db";
+import { SUPPORTED_LANGUAGES } from "./translate";
+
+// Helper to render URL XML with all hreflang alternates
+function renderUrlXml(url: string, priority: number, changefreq: string, lastmod: string, imagesXml: string = ""): string {
+  const domain = "https://newstrendey.com";
+  let path = url.substring(domain.length);
+  if (!path.startsWith("/")) {
+    path = "/" + path;
+  }
+
+  let xml = "";
+
+  // 1. Render default/English URL
+  xml += `  <url>
+    <loc>${url}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority.toFixed(1)}</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${domain}${path}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${domain}${path}" />\n`;
+  
+  SUPPORTED_LANGUAGES.forEach((lang) => {
+    xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${domain}/${lang}${path}" />\n`;
+  });
+  
+  if (imagesXml) {
+    xml += imagesXml;
+  }
+  xml += `  </url>\n`;
+
+  // 2. Render localized alternate URLs as main entries
+  SUPPORTED_LANGUAGES.forEach((lang) => {
+    xml += `  <url>
+    <loc>${domain}/${lang}${path}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority.toFixed(1)}</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${domain}${path}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${domain}${path}" />\n`;
+
+    SUPPORTED_LANGUAGES.forEach((otherLang) => {
+      xml += `    <xhtml:link rel="alternate" hreflang="${otherLang}" href="${domain}/${otherLang}${path}" />\n`;
+    });
+
+    if (imagesXml) {
+      xml += imagesXml;
+    }
+    xml += `  </url>\n`;
+  });
+
+  return xml;
+}
 
 export async function generateCategorySitemap(category: string) {
+  const lastmod = new Date().toISOString();
+
   if (category === "static") {
     // Return static pages sitemap
     const staticPages = [
@@ -18,19 +72,17 @@ export async function generateCategorySitemap(category: string) {
       { url: "https://newstrendey.com/autos/compare/", priority: 0.6, changefreq: "daily" },
     ];
 
+    let xmlItems = "";
+    staticPages.forEach((page) => {
+      xmlItems += renderUrlXml(page.url, page.priority, page.changefreq, lastmod);
+    });
+
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticPages
-  .map(
-    (page) => `  <url>
-    <loc>${page.url}</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority.toFixed(1)}</priority>
-  </url>`
-  )
-  .join("\n")}
-</urlset>`;
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+${xmlItems}</urlset>`;
 
     return new NextResponse(xml, {
       headers: {
@@ -42,20 +94,15 @@ ${staticPages
 
   // Fetch articles belonging to this specific category
   const articles = await getArticlesByCategory(category);
-
   let xmlItems = "";
 
   // 1. Add the category listing page itself
-  xmlItems += `  <url>
-    <loc>https://newstrendey.com/${category}/</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>\n`;
+  const catUrl = `https://newstrendey.com/${category}/`;
+  xmlItems += renderUrlXml(catUrl, 0.9, "daily", lastmod);
 
   // 2. Add individual article routes
   articles.forEach((article) => {
-    let dateModifiedStr = new Date().toISOString();
+    let dateModifiedStr = lastmod;
     if (article.dateModified) {
       try {
         dateModifiedStr = new Date(article.dateModified).toISOString();
@@ -66,12 +113,7 @@ ${staticPages
 
     const locUrl = `https://newstrendey.com/${article.category.toLowerCase()}/${article.slug}/`;
 
-    xmlItems += `  <url>
-    <loc>${locUrl}</loc>
-    <lastmod>${dateModifiedStr}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>`;
-
+    let imagesXml = "";
     if (article.featuredImage) {
       let imageUrl = article.featuredImage;
       if (imageUrl.startsWith("/")) {
@@ -86,18 +128,19 @@ ${staticPages
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&apos;");
 
-      xmlItems += `\n    <image:image>
+      imagesXml = `    <image:image>
       <image:loc>${imageUrl}</image:loc>
       <image:title><![CDATA[${escapedTitle}]]></image:title>
-    </image:image>`;
+    </image:image>\n`;
     }
 
-    xmlItems += `\n  </url>\n`;
+    xmlItems += renderUrlXml(locUrl, 0.8, "weekly", dateModifiedStr, imagesXml);
   });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 >
 ${xmlItems}</urlset>`;

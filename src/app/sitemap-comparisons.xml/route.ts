@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import vehiclesData from "../../data/vehicles.json";
+import { SUPPORTED_LANGUAGES } from "../../lib/translate";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600; // Cache for 1 hour
@@ -27,19 +28,55 @@ export async function GET() {
     }
   }
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls
-  .map(
-    (url) => `  <url>
+  let xmlItems = "";
+  const lastmod = new Date().toISOString();
+
+  urls.forEach((url) => {
+    const domain = "https://newstrendey.com";
+    let path = url.substring(domain.length);
+    if (!path.startsWith("/")) {
+      path = "/" + path;
+    }
+
+    // 1. English default entry
+    xmlItems += `  <url>
     <loc>${url}</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-  </url>`
-  )
-  .join("\n")}
-</urlset>`;
+    <xhtml:link rel="alternate" hreflang="x-default" href="${domain}${path}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${domain}${path}" />\n`;
+    
+    SUPPORTED_LANGUAGES.forEach((lang) => {
+      xmlItems += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${domain}/${lang}${path}" />\n`;
+    });
+    
+    xmlItems += `  </url>\n`;
+
+    // 2. Localized entries
+    SUPPORTED_LANGUAGES.forEach((lang) => {
+      xmlItems += `  <url>
+    <loc>${domain}/${lang}${path}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${domain}${path}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${domain}${path}" />\n`;
+
+      SUPPORTED_LANGUAGES.forEach((otherLang) => {
+        xmlItems += `    <xhtml:link rel="alternate" hreflang="${otherLang}" href="${domain}/${otherLang}${path}" />\n`;
+      });
+
+      xmlItems += `  </url>\n`;
+    });
+  });
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+${xmlItems}</urlset>`;
 
   return new NextResponse(xml, {
     headers: {

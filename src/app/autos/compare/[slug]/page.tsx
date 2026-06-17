@@ -61,6 +61,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: {
       canonical: `https://newstrendey.com/autos/compare/${slug}/`,
+      languages: {
+        "x-default": `https://newstrendey.com/autos/compare/${slug}/`,
+        "en": `https://newstrendey.com/autos/compare/${slug}/`,
+        "es": `https://newstrendey.com/es/autos/compare/${slug}/`,
+        "fr": `https://newstrendey.com/fr/autos/compare/${slug}/`,
+        "de": `https://newstrendey.com/de/autos/compare/${slug}/`,
+        "pt": `https://newstrendey.com/pt/autos/compare/${slug}/`,
+        "it": `https://newstrendey.com/it/autos/compare/${slug}/`,
+      }
     },
     openGraph: {
       title,
