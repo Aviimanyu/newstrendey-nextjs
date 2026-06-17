@@ -1,0 +1,8 @@
+wordpress_mirror
+.next/cache
+out
+.git
+node_modules
+temp
+tmp
+*.log
