@@ -15,6 +15,7 @@ export async function generateCategorySitemap(category: string) {
       { url: "https://newstrendey.com/fact-checking-policy/", priority: 0.5, changefreq: "monthly" },
       { url: "https://newstrendey.com/corrections-policy/", priority: 0.5, changefreq: "monthly" },
       { url: "https://newstrendey.com/ownership-and-funding/", priority: 0.5, changefreq: "monthly" },
+      { url: "https://newstrendey.com/autos/compare/", priority: 0.6, changefreq: "daily" },
     ];
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>

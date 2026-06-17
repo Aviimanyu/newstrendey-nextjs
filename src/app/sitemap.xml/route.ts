@@ -12,6 +12,7 @@ export async function GET() {
     "https://newstrendey.com/sitemap-entertainment.xml",
     "https://newstrendey.com/sitemap-rankings.xml",
     "https://newstrendey.com/sitemap-news.xml",
+    "https://newstrendey.com/sitemap-comparisons.xml",
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

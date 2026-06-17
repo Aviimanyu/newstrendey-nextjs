@@ -1,0 +1,152 @@
+[
+  {
+    "id": "toyota-land-cruiser",
+    "name": "2025 Toyota Land Cruiser",
+    "msrp": 55950,
+    "engine": "2.4L Turbocharged Hybrid 4-Cylinder (i-Force Max)",
+    "horsepower": 326,
+    "torque": 465,
+    "fuelEconomyCity": 22,
+    "fuelEconomyHighway": 25,
+    "groundClearance": 8.7,
+    "cargoSpaceSeatsUp": 37.5,
+    "cargoSpaceSeatsDown": 82.1,
+    "seatingCapacity": 5,
+    "pros": [
+      "Excellent standard hybrid fuel efficiency",
+      "Retro styling with modern premium comfort",
+      "Strong off-road capability with standard 4WD"
+    ],
+    "cons": [
+      "Third-row seat option is unavailable in US trims",
+      "Engine can sound unrefined under hard acceleration"
+    ],
+    "description": "The 2025 Toyota Land Cruiser returns to its heritage roots on the GA-F platform, combining a highly efficient hybrid powertrain with genuine off-road capability and everyday reliability.",
+    "image": "/autos/land-cruiser.png"
+  },
+  {
+    "id": "ford-bronco",
+    "name": "2025 Ford Bronco",
+    "msrp": 39630,
+    "engine": "2.7L EcoBoost Twin-Turbo V6",
+    "horsepower": 330,
+    "torque": 415,
+    "fuelEconomyCity": 18,
+    "fuelEconomyHighway": 20,
+    "groundClearance": 8.4,
+    "cargoSpaceSeatsUp": 35.6,
+    "cargoSpaceSeatsDown": 77.6,
+    "seatingCapacity": 5,
+    "pros": [
+      "Highly customizable with removable doors and roof",
+      "Outstanding trail dynamics and G.O.A.T. modes",
+      "Spacious interior layout with high visibility"
+    ],
+    "cons": [
+      "Excessive highway wind noise due to boxy design",
+      "Fuel economy is below average for the class"
+    ],
+    "description": "The 2025 Ford Bronco remains a premier off-road lifestyle vehicle, offering unmatched customizability, removable body panels, and a robust twin-turbocharged V6 engine.",
+    "image": "/autos/bronco.png"
+  },
+  {
+    "id": "jeep-wrangler",
+    "name": "2025 Jeep Wrangler",
+    "msrp": 32590,
+    "engine": "2.0L Turbocharged 4-Cylinder PHEV (4xe)",
+    "horsepower": 375,
+    "torque": 470,
+    "fuelEconomyCity": 20,
+    "fuelEconomyHighway": 21,
+    "groundClearance": 9.7,
+    "cargoSpaceSeatsUp": 31.7,
+    "cargoSpaceSeatsDown": 72.4,
+    "seatingCapacity": 5,
+    "pros": [
+      "Pioneering plug-in hybrid option with electric range",
+      "Legendary live-axle rock crawling capability",
+      "Unmatched aftermarket parts catalog support"
+    ],
+    "cons": [
+      "Stiff on-road ride quality compared to independent suspension rivals",
+      "Tight rear passenger legroom and cargo capacity"
+    ],
+    "description": "The 2025 Jeep Wrangler continues its reign as the quintessential American off-roader, featuring solid axles, a hybrid 4xe variant, and open-air adventure credentials.",
+    "image": "/autos/wrangler.png"
+  },
+  {
+    "id": "toyota-tundra",
+    "name": "2025 Toyota Tundra TRD Pro",
+    "msrp": 72510,
+    "engine": "3.4L Twin-Turbo V6 Hybrid (i-Force Max)",
+    "horsepower": 437,
+    "torque": 583,
+    "fuelEconomyCity": 18,
+    "fuelEconomyHighway": 20,
+    "groundClearance": 10.9,
+    "cargoSpaceSeatsUp": 40.0,
+    "cargoSpaceSeatsDown": 95.0,
+    "seatingCapacity": 5,
+    "pros": [
+      "Immense torque from twin-turbo hybrid engine",
+      "Premium TRD Pro suspension with FOX internal bypass shocks",
+      "Massive cab size and rugged composite bed construction"
+    ],
+    "cons": [
+      "High starting price compared to base full-size trucks",
+      "Maneuverability in urban settings is challenging"
+    ],
+    "description": "The 2025 Toyota Tundra TRD Pro is a high-performance desert-running full-size truck, packing twin-turbo hybrid power, aggressive styling, and a composite cargo bed.",
+    "image": "/autos/tundra.png"
+  },
+  {
+    "id": "ford-f150-raptor",
+    "name": "2025 Ford F-150 Raptor",
+    "msrp": 78330,
+    "engine": "3.5L High-Output EcoBoost V6",
+    "horsepower": 450,
+    "torque": 510,
+    "fuelEconomyCity": 14,
+    "fuelEconomyHighway": 18,
+    "groundClearance": 12.0,
+    "cargoSpaceSeatsUp": 52.8,
+    "cargoSpaceSeatsDown": 105.0,
+    "seatingCapacity": 5,
+    "pros": [
+      "World-class high-speed desert suspension with Fox Live Valve shocks",
+      "Spacious and luxurious crew cab layout",
+      "Massive road presence and standard 35-inch tires"
+    ],
+    "cons": [
+      "Very poor city fuel economy",
+      "Wide track makes parking and narrow trails difficult"
+    ],
+    "description": "The 2025 Ford F-150 Raptor is a legendary high-speed off-road truck, combining a robust high-output V6 engine with long-travel active suspension.",
+    "image": "/autos/raptor.png"
+  },
+  {
+    "id": "land-rover-defender",
+    "name": "2025 Land Rover Defender 110",
+    "msrp": 60600,
+    "engine": "3.0L Turbocharged Mild-Hybrid Inline-6 (P400)",
+    "horsepower": 395,
+    "torque": 406,
+    "fuelEconomyCity": 17,
+    "fuelEconomyHighway": 20,
+    "groundClearance": 11.5,
+    "cargoSpaceSeatsUp": 34.0,
+    "cargoSpaceSeatsDown": 78.8,
+    "seatingCapacity": 5,
+    "pros": [
+      "Luxurious, near-silent cabin with premium appointments",
+      "Excellent balance of on-road handling and trail crawling",
+      "Sophisticated height-adjustable air suspension"
+    ],
+    "cons": [
+      "Expensive optional features drive up the transaction price",
+      "Historically lower long-term reliability ratings"
+    ],
+    "description": "The 2025 Land Rover Defender 110 merges rugged utility with British luxury refinement, providing a smooth air-suspended ride alongside advanced electronic off-road systems.",
+    "image": "/autos/defender.png"
+  }
+]
