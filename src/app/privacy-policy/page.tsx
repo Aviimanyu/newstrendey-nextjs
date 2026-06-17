@@ -5,6 +5,9 @@ import { ChevronRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Learn how NewsTrendey collects, uses, protects, and discloses personal information.",
+  alternates: {
+    canonical: "https://newstrendey.com/privacy-policy/",
+  },
 };
 
 export default function PrivacyPolicyPage() {

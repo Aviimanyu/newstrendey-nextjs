@@ -5,6 +5,9 @@ import { ChevronRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Disclaimer",
   description: "Read the legal disclaimer governing the informational content and reviews provided on NewsTrendey.",
+  alternates: {
+    canonical: "https://newstrendey.com/disclaimer/",
+  },
 };
 
 export default function DisclaimerPage() {

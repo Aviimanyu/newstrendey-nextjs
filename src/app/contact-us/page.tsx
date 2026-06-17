@@ -5,6 +5,9 @@ import { ChevronRight, Mail, MapPin, Phone } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contact Us",
   description: "Get in touch with the editorial, press, and advertising teams at NewsTrendey.",
+  alternates: {
+    canonical: "https://newstrendey.com/contact-us/",
+  },
 };
 
 export default function ContactUsPage() {

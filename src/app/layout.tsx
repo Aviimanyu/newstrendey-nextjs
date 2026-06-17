@@ -170,11 +170,11 @@ export default function RootLayout({
               <div>
                 <h4 className="text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Categories</h4>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  <li><Link href="/autos" className="hover:text-brand transition-colors">Autos &amp; Vehicles</Link></li>
-                  <li><Link href="/technology" className="hover:text-brand transition-colors">Technology</Link></li>
-                  <li><Link href="/sports" className="hover:text-brand transition-colors">Sports</Link></li>
-                  <li><Link href="/entertainment" className="hover:text-brand transition-colors">Entertainment</Link></li>
-                  <li><Link href="/rankings" className="hover:text-brand transition-colors">Rankings</Link></li>
+                  <li><Link href="/autos/" className="hover:text-brand transition-colors">Autos &amp; Vehicles</Link></li>
+                  <li><Link href="/technology/" className="hover:text-brand transition-colors">Technology</Link></li>
+                  <li><Link href="/sports/" className="hover:text-brand transition-colors">Sports</Link></li>
+                  <li><Link href="/entertainment/" className="hover:text-brand transition-colors">Entertainment</Link></li>
+                  <li><Link href="/rankings/" className="hover:text-brand transition-colors">Rankings</Link></li>
                 </ul>
               </div>
 
@@ -182,10 +182,10 @@ export default function RootLayout({
               <div>
                 <h4 className="text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Editorial Integrity</h4>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  <li><Link href="/editorial-policy" className="hover:text-brand transition-colors">Editorial Policy</Link></li>
-                  <li><Link href="/fact-checking-policy" className="hover:text-brand transition-colors">Fact-Checking Policy</Link></li>
-                  <li><Link href="/corrections-policy" className="hover:text-brand transition-colors">Corrections Policy</Link></li>
-                  <li><Link href="/ownership-and-funding" className="hover:text-brand transition-colors">Ownership &amp; Funding</Link></li>
+                  <li><Link href="/editorial-policy/" className="hover:text-brand transition-colors">Editorial Policy</Link></li>
+                  <li><Link href="/fact-checking-policy/" className="hover:text-brand transition-colors">Fact-Checking Policy</Link></li>
+                  <li><Link href="/corrections-policy/" className="hover:text-brand transition-colors">Corrections Policy</Link></li>
+                  <li><Link href="/ownership-and-funding/" className="hover:text-brand transition-colors">Ownership &amp; Funding</Link></li>
                 </ul>
               </div>
               
@@ -193,11 +193,11 @@ export default function RootLayout({
               <div>
                 <h4 className="text-xs uppercase tracking-widest font-bold text-gray-300 mb-4">Corporate</h4>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  <li><Link href="/about-us" className="hover:text-brand transition-colors">About Us</Link></li>
-                  <li><Link href="/contact-us" className="hover:text-brand transition-colors">Contact Us</Link></li>
-                  <li><Link href="/privacy-policy" className="hover:text-brand transition-colors">Privacy Policy</Link></li>
-                  <li><Link href="/terms-and-conditions" className="hover:text-brand transition-colors">Terms &amp; Conditions</Link></li>
-                  <li><Link href="/disclaimer" className="hover:text-brand transition-colors">Disclaimer</Link></li>
+                  <li><Link href="/about-us/" className="hover:text-brand transition-colors">About Us</Link></li>
+                  <li><Link href="/contact-us/" className="hover:text-brand transition-colors">Contact Us</Link></li>
+                  <li><Link href="/privacy-policy/" className="hover:text-brand transition-colors">Privacy Policy</Link></li>
+                  <li><Link href="/terms-and-conditions/" className="hover:text-brand transition-colors">Terms &amp; Conditions</Link></li>
+                  <li><Link href="/disclaimer/" className="hover:text-brand transition-colors">Disclaimer</Link></li>
                 </ul>
               </div>
             </div>
@@ -206,8 +206,8 @@ export default function RootLayout({
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
               <p>&copy; {new Date().getFullYear()} NewsTrendey.com. All rights reserved.</p>
               <div className="flex gap-4">
-                <Link href="/privacy-policy" className="hover:underline">Privacy</Link>
-                <Link href="/terms-and-conditions" className="hover:underline">Terms</Link>
+                <Link href="/privacy-policy/" className="hover:underline">Privacy</Link>
+                <Link href="/terms-and-conditions/" className="hover:underline">Terms</Link>
                 <Link href="/sitemap.xml" className="hover:underline">Sitemap</Link>
               </div>
             </div>

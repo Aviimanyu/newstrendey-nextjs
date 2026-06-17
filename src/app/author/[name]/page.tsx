@@ -74,7 +74,7 @@ export default async function AuthorPage({ params }: PageProps) {
               className="group hover-card rounded-card border border-border p-4 bg-white flex flex-col justify-between"
             >
               <Link
-                href={`/${article.category.toLowerCase()}/${article.slug}`}
+                href={`/${article.category.toLowerCase()}/${article.slug}/`}
                 className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface"
               >
                 <img
@@ -89,7 +89,7 @@ export default async function AuthorPage({ params }: PageProps) {
                     {article.category}
                   </span>
                   <h2 className="font-serif text-base font-bold leading-snug text-black group-hover:text-brand transition-colors line-clamp-2">
-                    <Link href={`/${article.category.toLowerCase()}/${article.slug}`}>{article.title}</Link>
+                    <Link href={`/${article.category.toLowerCase()}/${article.slug}/`}>{article.title}</Link>
                   </h2>
                   <p className="mt-2 text-xs text-text-secondary line-clamp-3 leading-relaxed">
                     {article.description}

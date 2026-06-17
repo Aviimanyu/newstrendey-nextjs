@@ -78,7 +78,7 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
                 <span className="text-[10px] uppercase font-extrabold tracking-widest text-[#1c5f8b] mb-3 block">
                   Featured Review
                 </span>
-                <Link href={`/${featuredArticle.category.toLowerCase()}/${featuredArticle.slug}`}>
+                <Link href={`/${featuredArticle.category.toLowerCase()}/${featuredArticle.slug}/`}>
                   <h2 className="font-serif text-2xl md:text-4xl font-bold text-black hover:text-[#1c5f8b] transition-colors leading-tight mb-4">
                     Tested: {featuredArticle.title}
                   </h2>
@@ -105,7 +105,7 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <Link href={`/${featuredArticle.category.toLowerCase()}/${featuredArticle.slug}`}>
+                  <Link href={`/${featuredArticle.category.toLowerCase()}/${featuredArticle.slug}/`}>
                     <button 
                       className="btn-filled cursor-pointer inline-flex items-center gap-2 hover:bg-[#1b5f8a] transition-all"
                       style={{
@@ -148,7 +148,7 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
             </div>
             
             <Link 
-              href={`/${featuredArticle.category.toLowerCase()}/${featuredArticle.slug}`}
+              href={`/${featuredArticle.category.toLowerCase()}/${featuredArticle.slug}/`}
               className="block overflow-hidden rounded-md h-[240px] md:h-[380px] w-full relative bg-[#f1f7f7]"
             >
               <img
@@ -206,7 +206,7 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
                     className="group bg-white rounded-md border border-[#f1f7f7] p-4 flex flex-col justify-between hover:border-[#1c5f8b]/20 hover:shadow-low transition-all duration-300"
                   >
                     <Link
-                      href={`/${article.category.toLowerCase()}/${article.slug}`}
+                      href={`/${article.category.toLowerCase()}/${article.slug}/`}
                       className="block overflow-hidden rounded-md h-[180px] mb-4 bg-[#f1f7f7] relative"
                     >
                       <img
@@ -221,7 +221,7 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
 
                     <div className="flex-grow flex flex-col justify-between">
                       <div>
-                        <Link href={`/${article.category.toLowerCase()}/${article.slug}`}>
+                        <Link href={`/${article.category.toLowerCase()}/${article.slug}/`}>
                           <h3 className="font-serif text-base font-bold leading-snug text-black group-hover:text-[#1c5f8b] transition-colors line-clamp-2 mb-2">
                             {article.title}
                           </h3>
@@ -239,7 +239,7 @@ export default function BlogFeed({ initialArticles }: BlogFeedProps) {
                           </span>
                           
                           <Link 
-                            href={`/${article.category.toLowerCase()}/${article.slug}`}
+                            href={`/${article.category.toLowerCase()}/${article.slug}/`}
                             className="text-[#1c5f8b] hover:underline inline-flex items-center gap-0.5 hover:text-[#1b5f8a] font-bold"
                           >
                             Read Analysis →

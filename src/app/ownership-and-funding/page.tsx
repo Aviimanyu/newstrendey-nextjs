@@ -5,6 +5,9 @@ import { ChevronRight, ShieldCheck, DollarSign, Users } from "lucide-react";
 export const metadata: Metadata = {
   title: "Ownership & Funding Info",
   description: "Get transparent details about the ownership, operating group, and funding structure behind NewsTrendey.",
+  alternates: {
+    canonical: "https://newstrendey.com/ownership-and-funding/",
+  },
 };
 
 export default function OwnershipAndFundingPage() {

@@ -5,6 +5,9 @@ import { ChevronRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Terms and Conditions",
   description: "Read the terms of use governing your access to and interactions with NewsTrendey.",
+  alternates: {
+    canonical: "https://newstrendey.com/terms-and-conditions/",
+  },
 };
 
 export default function TermsPage() {

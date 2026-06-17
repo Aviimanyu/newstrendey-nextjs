@@ -11,7 +11,10 @@ export async function generateCategorySitemap(category: string) {
       { url: "https://newstrendey.com/privacy-policy/", priority: 0.5, changefreq: "monthly" },
       { url: "https://newstrendey.com/terms-and-conditions/", priority: 0.5, changefreq: "monthly" },
       { url: "https://newstrendey.com/disclaimer/", priority: 0.5, changefreq: "monthly" },
-      { url: "https://newstrendey.com/search/", priority: 0.5, changefreq: "monthly" },
+      { url: "https://newstrendey.com/editorial-policy/", priority: 0.5, changefreq: "monthly" },
+      { url: "https://newstrendey.com/fact-checking-policy/", priority: 0.5, changefreq: "monthly" },
+      { url: "https://newstrendey.com/corrections-policy/", priority: 0.5, changefreq: "monthly" },
+      { url: "https://newstrendey.com/ownership-and-funding/", priority: 0.5, changefreq: "monthly" },
     ];
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>

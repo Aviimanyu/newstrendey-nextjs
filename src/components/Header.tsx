@@ -11,11 +11,11 @@ export default function Header() {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "Autos & Vehicles", href: "/autos" },
-    { name: "Technology", href: "/technology" },
-    { name: "Sports", href: "/sports" },
-    { name: "Entertainment", href: "/entertainment" },
-    { name: "Rankings", href: "/rankings" },
+    { name: "Autos & Vehicles", href: "/autos/" },
+    { name: "Technology", href: "/technology/" },
+    { name: "Sports", href: "/sports/" },
+    { name: "Entertainment", href: "/entertainment/" },
+    { name: "Rankings", href: "/rankings/" },
   ];
 
   const isActive = (href: string) => {

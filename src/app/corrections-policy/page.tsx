@@ -5,6 +5,9 @@ import { ChevronRight, ShieldCheck, HelpCircle, AlertCircle } from "lucide-react
 export const metadata: Metadata = {
   title: "Corrections Policy",
   description: "Learn how NewsTrendey handles factual errors, correction logs, and editorial transparency.",
+  alternates: {
+    canonical: "https://newstrendey.com/corrections-policy/",
+  },
 };
 
 export default function CorrectionsPolicyPage() {

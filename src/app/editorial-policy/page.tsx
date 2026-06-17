@@ -5,6 +5,9 @@ import { ChevronRight, ShieldCheck, FileText, CheckCircle2 } from "lucide-react"
 export const metadata: Metadata = {
   title: "Editorial Policy",
   description: "Learn about the journalistic standards, ethics, and editorial values that guide the publishing process at NewsTrendey.",
+  alternates: {
+    canonical: "https://newstrendey.com/editorial-policy/",
+  },
 };
 
 export default function EditorialPolicyPage() {

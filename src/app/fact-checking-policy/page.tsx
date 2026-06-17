@@ -5,6 +5,9 @@ import { ChevronRight, ShieldCheck, CheckSquare, Search } from "lucide-react";
 export const metadata: Metadata = {
   title: "Fact-Checking Policy",
   description: "Read the fact-checking process, guidelines, and source verification rules behind NewsTrendey's journalism.",
+  alternates: {
+    canonical: "https://newstrendey.com/fact-checking-policy/",
+  },
 };
 
 export default function FactCheckingPolicyPage() {

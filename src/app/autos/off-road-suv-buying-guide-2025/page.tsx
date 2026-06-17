@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "The Complete Off-Road SUV Buying Guide 2025 | NewsTrendey",
   description: "Our comprehensive guide evaluates GA-F platforms, body-on-frame vs unibody structures, locking differentials, and compares Land Cruiser, Bronco, and Wrangler.",
   alternates: {
-    canonical: "https://newstrendey.com/autos/off-road-suv-buying-guide-2025",
+    canonical: "https://newstrendey.com/autos/off-road-suv-buying-guide-2025/",
   },
 };
 
@@ -42,7 +42,7 @@ export default function OffRoadSUVBuyingGuide() {
           "@type": "ListItem",
           "position": 3,
           "name": "Off-Road SUV Buying Guide 2025",
-          "item": "https://newstrendey.com/autos/off-road-suv-buying-guide-2025"
+          "item": "https://newstrendey.com/autos/off-road-suv-buying-guide-2025/"
         }
       ]
     },
@@ -128,7 +128,7 @@ export default function OffRoadSUVBuyingGuide() {
                   </div>
                 </div>
                 <div className="text-xs text-text-secondary md:border-l border-border md:pl-6 max-w-xl font-light leading-relaxed">
-                  <strong>David Williams</strong> is a leading automotive journalist with 8+ years of experience covering off-road systems and unibody mechanics. His rigorous evaluations are featured inside <em>MotorTrend</em>, <em>Car and Driver</em>, and <em>Edmunds</em>. Our assessments comply completely with our <Link href="/about-us" className="text-brand hover:underline font-bold text-xs uppercase tracking-widest border border-brand/10 px-2 py-0.5 rounded-sm bg-brand/5">Editorial Methodology</Link>.
+                  <strong>David Williams</strong> is a leading automotive journalist with 8+ years of experience covering off-road systems and unibody mechanics. His rigorous evaluations are featured inside <em>MotorTrend</em>, <em>Car and Driver</em>, and <em>Edmunds</em>. Our assessments comply completely with our <Link href="/about-us/" className="text-brand hover:underline font-bold text-xs uppercase tracking-widest border border-brand/10 px-2 py-0.5 rounded-sm bg-brand/5">Editorial Methodology</Link>.
                 </div>
               </div>
 
@@ -353,7 +353,7 @@ export default function OffRoadSUVBuyingGuide() {
               <p className="text-xs text-text-secondary leading-relaxed mb-4 font-light">
                 David Williams is an automotive specialist at NewsTrendey. All reviews, structural specs checklists, and mechanical powertrain comparisons are compiled from hands-on evaluations, verified manufacturer documentation, and official crash-testing safety databases to guarantee complete objective accuracy.
               </p>
-              <Link href="/author/davidwilliams" className="text-xs uppercase font-extrabold text-brand hover:text-brand-hover inline-flex items-center gap-1">
+              <Link href="/author/davidwilliams/" className="text-xs uppercase font-extrabold text-brand hover:text-brand-hover inline-flex items-center gap-1">
                 <span>View All Coverage By David</span>
                 <ChevronRight className="h-3 w-3" />
               </Link>

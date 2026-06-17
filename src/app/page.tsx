@@ -27,7 +27,7 @@ export default async function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             {/* Main Hero Card (2 columns) */}
             <div className="lg:col-span-2 flex flex-col justify-between group">
-              <Link href={`/${heroArticle.category.toLowerCase()}/${heroArticle.slug}`} className="block overflow-hidden rounded-card relative h-[300px] lg:h-[500px] shadow-premium bg-surface">
+              <Link href={`/${heroArticle.category.toLowerCase()}/${heroArticle.slug}/`} className="block overflow-hidden rounded-card relative h-[300px] lg:h-[500px] shadow-premium bg-surface">
                 <img
                   src={heroArticle.featuredImage}
                   alt={heroArticle.title}
@@ -75,7 +75,7 @@ export default async function Home() {
                         {article.category}
                       </span>
                       <Link
-                        href={`/${article.category.toLowerCase()}/${article.slug}`}
+                        href={`/${article.category.toLowerCase()}/${article.slug}/`}
                         className="font-bold text-sm text-black leading-tight block group-hover:text-brand transition-colors line-clamp-2"
                       >
                         {article.title}
@@ -95,7 +95,7 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {secondaryFeatured.map((article) => (
             <div key={article.slug} className="flex flex-col justify-between group hover-card rounded-card border border-border p-4 bg-white">
-              <Link href={`/${article.category.toLowerCase()}/${article.slug}`} className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface relative">
+              <Link href={`/${article.category.toLowerCase()}/${article.slug}/`} className="block overflow-hidden rounded-md h-[180px] mb-4 bg-surface relative">
                 <img
                   src={article.featuredImage}
                   alt={article.title}
@@ -108,7 +108,7 @@ export default async function Home() {
               <div className="flex-grow flex flex-col justify-between">
                 <div>
                   <h3 className="font-serif text-lg font-bold leading-snug text-black group-hover:text-brand transition-colors line-clamp-2">
-                    <Link href={`/${article.category.toLowerCase()}/${article.slug}`}>{article.title}</Link>
+                    <Link href={`/${article.category.toLowerCase()}/${article.slug}/`}>{article.title}</Link>
                   </h3>
                   <p className="mt-2 text-xs text-text-secondary line-clamp-3">
                     {article.description}
@@ -146,7 +146,7 @@ export default async function Home() {
                     {category.name}
                   </h3>
                   <Link
-                    href={`/${category.id}`}
+                    href={`/${category.id}/`}
                     className="text-xs uppercase tracking-widest font-extrabold text-brand hover:text-brand-hover flex items-center gap-1 group"
                   >
                     <span>View All {category.name}</span>
@@ -157,7 +157,7 @@ export default async function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {catArticles.map((article) => (
                     <article key={article.slug} className="group hover-card rounded-card border border-border p-4 bg-white flex flex-col justify-between">
-                      <Link href={`/${article.category.toLowerCase()}/${article.slug}`} className="block overflow-hidden rounded-md h-[160px] mb-4 bg-surface">
+                      <Link href={`/${article.category.toLowerCase()}/${article.slug}/`} className="block overflow-hidden rounded-md h-[160px] mb-4 bg-surface">
                         <img
                           src={article.featuredImage}
                           alt={article.title}
@@ -167,7 +167,7 @@ export default async function Home() {
                       <div className="flex-grow flex flex-col justify-between">
                         <div>
                           <h4 className="font-serif text-base font-bold leading-snug text-black group-hover:text-brand transition-colors line-clamp-2">
-                            <Link href={`/${article.category.toLowerCase()}/${article.slug}`}>{article.title}</Link>
+                            <Link href={`/${article.category.toLowerCase()}/${article.slug}/`}>{article.title}</Link>
                           </h4>
                           <p className="mt-2 text-xs text-text-secondary line-clamp-3">
                             {article.description}

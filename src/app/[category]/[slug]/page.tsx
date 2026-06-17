@@ -113,7 +113,7 @@ export default async function ArticlePage({ params }: PageProps) {
   const schemas: any[] = [
     {
       "@context": "https://schema.org",
-      "@type": isReview ? "ProductReview" : "NewsArticle",
+      "@type": isReview ? "Review" : "NewsArticle",
       "headline": article.title,
       "image": [article.featuredImage],
       "datePublished": article.datePublished,
@@ -148,7 +148,9 @@ export default async function ArticlePage({ params }: PageProps) {
       ...(isReview && {
         "itemReviewed": {
           "@type": "Product",
-          "name": article.title.split("Review")[0]?.trim() || "Automobile"
+          "name": article.title.split("Review")[0]?.trim() || "Automobile",
+          "image": [article.featuredImage],
+          "description": article.description
         },
         "reviewRating": {
           "@type": "Rating",

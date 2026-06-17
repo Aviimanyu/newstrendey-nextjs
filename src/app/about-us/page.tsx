@@ -5,6 +5,9 @@ import { ChevronRight, ShieldCheck, Award, Heart } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Us",
   description: "Learn about the mission, journalistic values, and editorial process behind NewsTrendey.",
+  alternates: {
+    canonical: "https://newstrendey.com/about-us/",
+  },
 };
 
 export default function AboutUsPage() {
