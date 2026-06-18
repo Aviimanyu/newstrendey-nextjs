@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Merriweather } from "next/font/google";
 import Link from "next/link";
+import Script from "next/script";
 import "./globals.css";
 import Header from "../components/Header";
 import React from "react";
@@ -118,6 +119,20 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${merriweather.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-black font-sans selection:bg-brand/20 selection:text-brand">
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-987G8343T3"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-987G8343T3');
+          `}
+        </Script>
+
         {/* Sticky Global Header */}
         <Header />
         
