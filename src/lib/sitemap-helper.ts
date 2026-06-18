@@ -94,7 +94,17 @@ ${xmlItems}</urlset>`;
   }
 
   // Fetch articles belonging to this specific category
-  const articles = await getArticlesByCategory(category);
+  const rawArticles = await getArticlesByCategory(category);
+  
+  // Deduplicate by slug
+  const seenSlugs = new Set<string>();
+  const articles = rawArticles.filter((article) => {
+    const slug = article.slug?.toLowerCase().trim();
+    if (!slug || seenSlugs.has(slug)) return false;
+    seenSlugs.add(slug);
+    return true;
+  });
+  
   let xmlItems = "";
 
   // 1. Add the category listing page itself

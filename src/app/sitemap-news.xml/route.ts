@@ -10,16 +10,27 @@ export async function GET() {
   // Clean articles: avoid author pages
   const articles = allArticles.filter(art => art.category !== "author" && art.slug);
 
-  // Filter for articles published in the last 48 hours
+  // Filter for articles published in the last 48 hours and deduplicate by slug
   const fortyEightHoursAgo = Date.now() - 48 * 60 * 60 * 1000;
+  const seenSlugs = new Set<string>();
   let recentArticles = articles.filter((article) => {
     const pubTime = new Date(article.datePublished).getTime();
-    return pubTime >= fortyEightHoursAgo;
+    if (pubTime < fortyEightHoursAgo) return false;
+    const slug = article.slug?.toLowerCase().trim();
+    if (!slug || seenSlugs.has(slug)) return false;
+    seenSlugs.add(slug);
+    return true;
   });
 
   // Fallback to top 5 articles if no article has been published in the last 48 hours
   if (recentArticles.length === 0) {
-    recentArticles = articles.slice(0, 5);
+    const fallbackSeen = new Set<string>();
+    recentArticles = articles.filter((article) => {
+      const slug = article.slug?.toLowerCase().trim();
+      if (!slug || fallbackSeen.has(slug)) return false;
+      fallbackSeen.add(slug);
+      return true;
+    }).slice(0, 5);
   }
 
   let xmlItems = "";
