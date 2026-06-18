@@ -16,20 +16,66 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
         <style>
+          :root {
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+            --header-grad-start: #1e3a8a;
+            --header-grad-end: #1b5f8a;
+            --border-color: #e2e8f0;
+            --th-bg: #f1f5f9;
+            --th-text: #475569;
+            --tr-hover: #f8fafc;
+            --link-color: #1b5f8a;
+            --link-hover: #1e3a8a;
+            --badge-priority-bg: #eff6ff;
+            --badge-priority-text: #1d4ed8;
+            --badge-freq-bg: #f0fdf4;
+            --badge-freq-text: #166534;
+            --badge-lang-bg: #f5f3ff;
+            --badge-lang-text: #5b21b6;
+            --muted-text: #64748b;
+          }
+
+          /* Explicit Support for Dark Mode */
+          @media (prefers-color-mode: dark) {
+            :root {
+              --bg-color: #0b1329;
+              --text-color: #f1f5f9;
+              --card-bg: #111b35;
+              --header-grad-start: #070e20;
+              --header-grad-end: #1b5f8a;
+              --border-color: #1e294b;
+              --th-bg: #172544;
+              --th-text: #94a3b8;
+              --tr-hover: #16223f;
+              --link-color: #38bdf8;
+              --link-hover: #7dd3fc;
+              --badge-priority-bg: #1e3a8a;
+              --badge-priority-text: #93c5fd;
+              --badge-freq-bg: #064e3b;
+              --badge-freq-text: #6ee7b7;
+              --badge-lang-bg: #3b0764;
+              --badge-lang-text: #c084fc;
+              --muted-text: #94a3b8;
+            }
+          }
+
           body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 40px 20px;
             line-height: 1.5;
+            transition: background-color 0.2s ease, color 0.2s ease;
           }
           .container {
             max-width: 1200px;
             margin: 0 auto;
           }
           header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1b5f8a 100%);
+            background: linear-gradient(135deg, var(--header-grad-start) 0%, var(--header-grad-end) 100%);
             color: white;
             padding: 40px;
             border-radius: 16px;
@@ -46,7 +92,7 @@
             margin: 0 0 20px 0;
             font-size: 16px;
             color: #e2e8f0;
-            font-weight: 300 lead;
+            font-weight: 300;
           }
           .stats {
             display: flex;
@@ -67,10 +113,10 @@
             font-weight: 700;
           }
           .table-container {
-            background: white;
+            background: var(--card-bg);
             border-radius: 16px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4.5px -1px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             overflow: hidden;
           }
           table {
@@ -80,34 +126,34 @@
             font-size: 14px;
           }
           th {
-            background-color: #f1f5f9;
-            color: #475569;
+            background-color: var(--th-bg);
+            color: var(--th-text);
             font-weight: 600;
             padding: 16px 20px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
             text-transform: uppercase;
             font-size: 12px;
             letter-spacing: 0.05em;
           }
           td {
             padding: 16px 20px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
             word-break: break-all;
           }
           tr:last-child td {
             border-bottom: none;
           }
           tr:hover td {
-            background-color: #f8fafc;
+            background-color: var(--tr-hover);
           }
           a {
-            color: #1b5f8a;
+            color: var(--link-color);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.15s ease;
           }
           a:hover {
-            color: #1e3a8a;
+            color: var(--link-hover);
             text-decoration: underline;
           }
           .badge {
@@ -120,35 +166,23 @@
             letter-spacing: 0.025em;
           }
           .badge-priority {
-            background-color: #eff6ff;
-            color: #1d4ed8;
+            background-color: var(--badge-priority-bg);
+            color: var(--badge-priority-text);
           }
           .badge-freq {
-            background-color: #f0fdf4;
-            color: #166534;
+            background-color: var(--badge-freq-bg);
+            color: var(--badge-freq-text);
           }
-          .badge-lang {
-            background-color: #f5f3ff;
-            color: #5b21b6;
-            margin-right: 4px;
-            margin-bottom: 4px;
-          }
-          .alternates-list {
-            margin-top: 8px;
-            font-size: 12px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-          }
+
           .lastmod-time {
-            color: #64748b;
+            color: var(--muted-text);
             font-family: monospace;
           }
           .footer {
             margin-top: 40px;
             text-align: center;
             font-size: 12px;
-            color: #94a3b8;
+            color: var(--muted-text);
           }
         </style>
       </head>
@@ -227,17 +261,7 @@
                         <td>
                           <a href="{sitemap:loc}"><xsl:value-of select="sitemap:loc" /></a>
                           
-                          <!-- Render dynamic alternates/hreflangs if they exist -->
-                          <xsl:if test="xhtml:link">
-                            <div class="alternates-list">
-                              <xsl:for-each select="xhtml:link">
-                                <span class="badge badge-lang">
-                                  <xsl:value-of select="@hreflang" />: 
-                                  <a href="{@href}" style="font-size: 11px; font-weight: normal; color: inherit;">link</a>
-                                </span>
-                              </xsl:for-each>
-                            </div>
-                          </xsl:if>
+
                         </td>
                         <td>
                           <span class="badge badge-priority">
@@ -265,21 +289,21 @@
                             <div style="font-weight: 600; font-size: 13px; margin-bottom: 4px;">
                               <xsl:value-of select="news:news/news:title" />
                             </div>
-                            <div style="font-size: 11px; color: #64748b;">
+                            <div style="font-size: 11px; color: var(--muted-text);">
                               Published: <span class="lastmod-time"><xsl:value-of select="news:news/news:publication_date" /></span>
                             </div>
                           </xsl:if>
                           
                           <!-- Standard Lastmod if it exists and not news sitemap -->
                           <xsl:if test="sitemap:lastmod and not(news:news)">
-                            <div style="font-size: 11px; color: #64748b;">
+                            <div style="font-size: 11px; color: var(--muted-text);">
                               Last Modified: <span class="lastmod-time"><xsl:value-of select="sitemap:lastmod" /></span>
                             </div>
                           </xsl:if>
 
                           <!-- Standard Images if they exist -->
                           <xsl:if test="image:image">
-                            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
+                            <div style="font-size: 11px; color: var(--muted-text); margin-top: 4px;">
                               Images: 
                               <a href="{image:image/image:loc}" target="_blank">
                                 <xsl:choose>
