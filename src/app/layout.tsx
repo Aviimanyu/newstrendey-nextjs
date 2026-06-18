@@ -221,6 +221,7 @@ export default function RootLayout({
                   <li><Link href="/privacy-policy/" className="hover:text-brand transition-colors">Privacy Policy</Link></li>
                   <li><Link href="/terms-and-conditions/" className="hover:text-brand transition-colors">Terms &amp; Conditions</Link></li>
                   <li><Link href="/disclaimer/" className="hover:text-brand transition-colors">Disclaimer</Link></li>
+                  <li><Link href="/blog/write-for-us/" className="hover:text-brand transition-colors">Write for Us</Link></li>
                 </ul>
               </div>
             </div>

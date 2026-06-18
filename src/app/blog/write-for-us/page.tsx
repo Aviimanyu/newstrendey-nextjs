@@ -95,7 +95,7 @@ export default function WriteForUsPage() {
                 </div>
               </div>
               <p className="text-xs text-text-secondary italic">
-                * Note: If you are promoting a commercial product, SaaS company, or link-building client, your pitch falls under our Sponsored Placement tier. Email <a href="mailto:editor@newstrendey.com" className="text-brand hover:underline">editor@newstrendey.com</a> with the subject <strong>"Sponsored Placement Query"</strong> for pricing.
+                * Note: If you are promoting a commercial product, SaaS company, or link-building client, your pitch falls under our Sponsored Placement tier. Email <a href="mailto:newstrendey@gmail.com" className="text-brand hover:underline">newstrendey@gmail.com</a> with the subject <strong>"Sponsored Placement Query"</strong> for pricing.
               </p>
             </section>
 
@@ -285,10 +285,10 @@ export default function WriteForUsPage() {
                 <div className="p-3 bg-white/5 rounded-md border border-white/10 space-y-2">
                   <div className="text-[10px] text-gray-500 uppercase font-bold tracking-wider">Direct Email</div>
                   <a 
-                    href="mailto:editor@newstrendey.com" 
+                    href="mailto:newstrendey@gmail.com" 
                     className="text-white hover:text-brand transition-colors text-sm font-bold block truncate"
                   >
-                    editor@newstrendey.com
+                    newstrendey@gmail.com
                   </a>
                 </div>
 
@@ -302,7 +302,7 @@ export default function WriteForUsPage() {
                 </div>
 
                 <a 
-                  href="mailto:editor@newstrendey.com?subject=Guest%20Post%20Proposal%20-%20NewsTrendey" 
+                  href="mailto:newstrendey@gmail.com?subject=Guest%20Post%20Proposal%20-%20NewsTrendey" 
                   className="w-full bg-[#991b1b] hover:bg-red-800 text-white py-3 rounded-md text-xs font-bold flex items-center justify-center gap-2 transition-colors uppercase tracking-wider"
                 >
                   Submit Your Pitch
